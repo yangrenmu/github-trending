@@ -5,7 +5,7 @@ import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.scss'
-
+import bgImg from '../../image/bg.png'
 
 @connect(({ counter }) => ({
   counter
@@ -39,6 +39,7 @@ class Index extends Component {
   render () {
     return (
       <View className='main'>
+        <image src={bgImg}></image>
         <View className='description'>See what the GitHub community is most excited about today.</View>
       </View>
     )
