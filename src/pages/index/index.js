@@ -1,8 +1,9 @@
 import Taro, { Component } from "@tarojs/taro"
 import { View, Image } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
-import { Banner } from "../banner"
 import { add, minus, asyncAdd } from "../../actions/trending"
+import { Banner } from "../banner"
+import { Card } from "../card"
 import bgImg from "../../image/bg.png"
 import "../../common/iconfont/iconfont.css"
 import "./index.scss"
@@ -32,11 +33,11 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   render() {
     return (
@@ -46,9 +47,8 @@ class Index extends Component {
           <Image className='iconfont icon-set' />
           <View className='title'>Trending</View>
         </View>
-        <View className='banner'>
-          <Banner />
-        </View>
+        <Banner />
+        <Card />
       </View>
     )
   }
