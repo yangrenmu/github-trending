@@ -2,8 +2,8 @@ import Taro, { Component } from "@tarojs/taro"
 import { View, Swiper, SwiperItem, Image } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import * as actions from "../../actions/trending"
-import './banner.scss'
-import girlImg from '../../image/girl.jpg'
+import "./banner.scss"
+import girlImg from "../../image/girl.jpg"
 
 @connect(
   state => state.trending,
@@ -17,7 +17,7 @@ class Banner extends Component {
     }
   }
   componentDidMount() {
-    this.props.dispatchBanner("all", "daily").then(res => {
+    this.props.dispatchBanner("all", "daily").then(() => {
       const banner = this.props.banner
       this.setState({
         handpick: banner.slice(0, 3)
@@ -26,16 +26,20 @@ class Banner extends Component {
   }
   render() {
     const { handpick } = this.state
-    const bannerList = handpick && handpick.map(item => {
-      return (
-        <SwiperItem className="banner-item">
-          <Image className="banner-item-image" src={girlImg}></Image>
-          <View className="banner-item-mask"></View>
-          <View className="banner-item-description">{item.description}</View>
-          <View className="banner-item-info">{item.author}/{item.stars}</View>
-        </SwiperItem>
-      )
-    })
+    const bannerList =
+      handpick &&
+      handpick.map((item, index) => {
+        return (
+          <SwiperItem key={index} className='banner-item'>
+            <Image className='banner-item-image' src={girlImg} />
+            <View className='banner-item-mask' />
+            <View className='banner-item-description'>{item.description}</View>
+            <View className='banner-item-info'>
+              {item.author}/{item.stars}
+            </View>
+          </SwiperItem>
+        )
+      })
     return (
       <View>
         <Swiper
@@ -48,7 +52,7 @@ class Banner extends Component {
         >
           {bannerList}
         </Swiper>
-      </View >
+      </View>
     )
   }
 }

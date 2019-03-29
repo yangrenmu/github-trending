@@ -29,15 +29,17 @@ class Index extends Component {
     navigationBarTitleText: "Trending"
   }
 
+  componentDidMount() {}
+
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
-  componentDidShow() { }
+  componentDidShow() {}
 
-  componentDidHide() { }
+  componentDidHide() {}
 
   render() {
     return (
