@@ -1,3 +1,12 @@
+$blue: #24657c;
+@keyframes select {
+  from {
+    height: 0;
+  }
+  to {
+    height: 150px;
+  }
+}
 .card {
   font-size: 30px;
   display: flex;
@@ -10,9 +19,9 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      height: 60px;
-      // border: 1px solid #24657c;
-      // border-radius: 10px;
+      padding: 0 0 0 10px;
+      height: 70px;
+      border-radius: 5px;
       &-text {
         color: #24657c;
       }
@@ -20,14 +29,22 @@
         display: inline-block;
         width: 30px;
         height: 20px;
-        padding: 10px 0 0 20px;
+        padding: 10px 10px;
         font-size: 24px;
         color: #24657c;
       }
     }
-    .select-text {
-      color: #fff;
-      background-color: rgba(0, 0, 0, 0.3);
+    .select-item {
+      max-height: 150px;
+      overflow: hidden;
+      text-align: center;
+      color: $blue;
+      background-color: rgba(190, 190, 190, 0.7);
+      animation: select 0.3s;
+      .select-text {
+        height: 50px;
+        line-height: 50px;
+      }
     }
   }
   &-language {
@@ -49,6 +66,18 @@
         font-size: 24px;
         color: #24657c;
       }
+    }
+  }
+  .select-item {
+    max-height: 150px;
+    overflow: hidden;
+    text-align: center;
+    color: $blue;
+    background-color: rgba(190, 190, 190, 0.7);
+    animation: select 0.3s;
+    .select-text {
+      height: 50px;
+      line-height: 50px;
     }
   }
 }

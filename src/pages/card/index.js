@@ -8,10 +8,13 @@ export default class Card extends Component {
     super()
     this.state = {
       since: ["today", "weekly", "monthly"],
-      language: ["javascript", "java", "go"],
+      language: ["javascript", "java", "go", "python", "c++", "pho"],
       sinceIcon: "iconfont icon-down",
       languageIcon: "iconfont icon-down",
-      showSinceSelect: false
+      showSinceSelect: false,
+      showLanguageSelect: false,
+      sinceItemName: "today",
+      languageItemName: "javascript"
     }
   }
   showSince = () => {
@@ -20,17 +23,55 @@ export default class Card extends Component {
       showSinceSelect: !showSinceSelect
     })
   }
+  onSinceSelect = e => {
+    e.preventDefault()
+    this.setState({
+      sinceItemName: e.currentTarget.dataset.name
+    })
+  }
+  showLanguage = () => {
+    const { showLanguageSelect } = this.state
+    this.setState({
+      showLanguageSelect: !showLanguageSelect
+    })
+  }
+  onLanguageSelect = e => {
+    e.preventDefault()
+    this.setState({
+      languageItemName: e.currentTarget.dataset.name
+    })
+  }
   render() {
     const {
       since,
       language,
       showSinceSelect,
+      showLanguageSelect,
       sinceIcon,
-      languageIcon
+      languageIcon,
+      sinceItemName,
+      languageItemName
     } = this.state
     const sinceList = since.map((item, index) => {
       return (
-        <View className='select' onClick={this.showSince} key={index}>
+        <View
+          className='select-text'
+          onClick={e => this.onSinceSelect(e)}
+          key={index}
+          data-name={item}
+        >
+          {item}
+        </View>
+      )
+    })
+    const languageList = language.map((item, index) => {
+      return (
+        <View
+          className='select-text'
+          onClick={e => this.onLanguageSelect(e)}
+          key={index}
+          data-name={item}
+        >
           {item}
         </View>
       )
@@ -39,23 +80,25 @@ export default class Card extends Component {
       <View className='card'>
         <View className='card-since' onClick={this.showSince}>
           <View className='card-since-wrap'>
-            <View className='card-since-wrap-text'>{`Trending：${
-              since[0]
-            }`}</View>
+            <View className='card-since-wrap-text'>{`Trending：${sinceItemName}`}</View>
             <Image className={sinceIcon} />
           </View>
-          <View className='select-text'>
-            {showSinceSelect ? sinceList : null}
-          </View>
+          {showSinceSelect ? (
+            <View className='select-item'>{sinceList}</View>
+          ) : null}
         </View>
-        <View className='card-language'>
+        <View onClick={this.showLanguage} className='card-language'>
           <View className='card-language-wrap'>
             <View className='card-language-wrap-text'>
-              {`language：${language[0]}`}
+              {`language：${languageItemName}`}
             </View>
             <Image className={languageIcon} />
           </View>
+          {showLanguageSelect ? (
+            <View className='select-item'>{languageList}</View>
+          ) : null}
         </View>
+        <View className='card-content' />
       </View>
     )
   }
