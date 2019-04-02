@@ -1,7 +1,7 @@
-import { BANNER } from '../constants/trending'
+import { BANNER, TRENDING } from "../constants/trending"
 
 const INITIAL_STATE = {
-  banner: ''
+  banner: ""
 }
 
 export default function trending(state = INITIAL_STATE, action) {
@@ -10,6 +10,10 @@ export default function trending(state = INITIAL_STATE, action) {
       return {
         ...state,
         banner: action.data
+      }
+    case TRENDING:
+      return {
+        ...state
       }
     default:
       return state

@@ -1,8 +1,15 @@
 import Taro, { Component } from "@tarojs/taro"
 import { View, Image } from "@tarojs/components"
+import { connect } from "@tarojs/redux"
+import * as actions from "../../actions/trending"
+import getTrending from "../../server/trending"
 import "../../common/iconfont/iconfont.css"
 import "./card.scss"
 
+@connect(
+  state => state,
+  ...actions
+)
 export default class Card extends Component {
   constructor() {
     super()
@@ -14,8 +21,20 @@ export default class Card extends Component {
       showSinceSelect: false,
       showLanguageSelect: false,
       sinceItemName: "today",
-      languageItemName: "javascript"
+      languageItemName: "javascript",
+      cardData: {}
     }
+  }
+  componentDidMount() {
+    const params = {
+      since: "today",
+      language: "javascript"
+    }
+    getTrending(params).then(res => {
+      this.setState({
+        cardData: res.data
+      })
+    })
   }
   showSince = () => {
     const { showSinceSelect } = this.state
@@ -50,7 +69,8 @@ export default class Card extends Component {
       sinceIcon,
       languageIcon,
       sinceItemName,
-      languageItemName
+      languageItemName,
+      cardData
     } = this.state
     const sinceList = since.map((item, index) => {
       return (
@@ -76,6 +96,25 @@ export default class Card extends Component {
         </View>
       )
     })
+    const cardList = cardData.map((item, index) => {
+      return (
+        <View key={index} className='card-warp'>
+          <View className='card-content'>
+            <View className='card-content-name'>{item.name}</View>
+            <View className='card-content-descript'>{item.description}</View>
+            <View className='card-content-feature'>
+              <View className='card-content-author'>{item.author}</View>
+              <View className='card-content-stars'>{item.stars}</View>
+              <View className='card-content-forks'>{item.forks}</View>
+            </View>
+          </View>
+          <View className='card-star'>
+            <View>{item.currentPeriodStars}</View>
+            <View>{sinceItemName}</View>
+          </View>
+        </View>
+      )
+    })
     return (
       <View className='card'>
         <View className='card-since' onClick={this.showSince}>
@@ -98,7 +137,7 @@ export default class Card extends Component {
             <View className='select-item'>{languageList}</View>
           ) : null}
         </View>
-        <View className='card-content' />
+        {cardList}
       </View>
     )
   }

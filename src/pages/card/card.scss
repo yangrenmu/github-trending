@@ -9,34 +9,29 @@ $blue: #24657c;
 }
 .card {
   font-size: 30px;
-  display: flex;
-  justify-content: space-around;
   margin: 20px 0;
-  &-since {
+  .card-since,
+  .card-language {
     display: inline-block;
-    &-wrap {
-      margin: 0 auto;
+    width: 50%;
+    .card-since-wrap,
+    .card-language-wrap {
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      padding: 0 0 0 10px;
       height: 70px;
-      border-radius: 5px;
-      &-text {
-        color: #24657c;
-      }
-      .icon-down {
-        display: inline-block;
+      .icon-down,
+      .icon-up {
         width: 30px;
         height: 20px;
-        padding: 10px 10px;
         font-size: 24px;
-        color: #24657c;
+        padding: 10px 10px;
       }
     }
     .select-item {
-      max-height: 150px;
-      overflow: hidden;
+      position: absolute;
+      width: 50%;
+      max-height: 144px;
+      overflow: scroll;
       text-align: center;
       color: $blue;
       background-color: rgba(190, 190, 190, 0.7);
@@ -47,37 +42,10 @@ $blue: #24657c;
       }
     }
   }
-  &-language {
-    display: inline-block;
-    vertical-align: top;
-    &-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 60px;
-      &-text {
-        color: #24657c;
-      }
-      .icon-down {
-        display: inline-block;
-        width: 30px;
-        height: 20px;
-        padding: 10px 10px;
-        font-size: 24px;
-        color: #24657c;
-      }
-    }
-  }
-  .select-item {
-    max-height: 150px;
-    overflow: hidden;
-    text-align: center;
-    color: $blue;
-    background-color: rgba(190, 190, 190, 0.7);
-    animation: select 0.3s;
-    .select-text {
-      height: 50px;
-      line-height: 50px;
+  .card-wrap {
+    display: flex;
+    .card-star {
+      flex: 0 0 100px;
     }
   }
 }

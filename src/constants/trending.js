@@ -3,4 +3,6 @@
 export const host = HOST
 /* eslint-enable */
 export const BANNER = "BANNER"
+export const TRENDING = "TRENDING"
+
 export const API_TRENDING = `${host}/repositories?`
