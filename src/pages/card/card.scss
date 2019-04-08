@@ -42,8 +42,16 @@ $blue: #24657c;
       }
     }
   }
-  .card-wrap {
+  .card-warp {
     display: flex;
+    margin: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 22px;
+    color: #fff;
+    .card-content {
+
+    }
     .card-star {
       flex: 0 0 100px;
     }
