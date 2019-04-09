@@ -22,7 +22,8 @@ export default class Card extends Component {
       showLanguageSelect: false,
       sinceItemName: "today",
       languageItemName: "javascript",
-      cardData: {}
+      cardData: {},
+      pageIndex: 0
     }
   }
   componentDidMount() {
@@ -70,7 +71,8 @@ export default class Card extends Component {
       languageIcon,
       sinceItemName,
       languageItemName,
-      cardData
+      cardData,
+      pageIndex
     } = this.state
     const sinceList = since.map((item, index) => {
       return (
@@ -96,16 +98,23 @@ export default class Card extends Component {
         </View>
       )
     })
-    const cardList = cardData.map((item, index) => {
+    const len = cardData.length
+    let currentCardList = []
+    if (len > pageIndex * 3) {
+      currentCardList = cardData.slice(0 + pageIndex, 3 + pageIndex)
+    }
+    const cardList = currentCardList.map((item, index) => {
       return (
         <View key={index} className='card-warp'>
           <View className='card-content'>
             <View className='card-content-name'>{item.name}</View>
             <View className='card-content-descript'>{item.description}</View>
             <View className='card-content-feature'>
-              <View className='card-content-author'>{item.author}</View>
-              <View className='card-content-stars'>{item.stars}</View>
-              <View className='card-content-forks'>{item.forks}</View>
+              <View className='card-content-author'>
+                {`${item.author}/stars: ${item.stars}/forks: ${item.forks}`}
+              </View>
+              {/* <View className='card-content-stars'>{item.stars}</View>
+              <View className='card-content-forks'>{item.forks}</View> */}
             </View>
           </View>
           <View className='card-star'>

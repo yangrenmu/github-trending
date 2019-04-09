@@ -44,15 +44,37 @@ $blue: #24657c;
   }
   .card-warp {
     display: flex;
-    margin: 40px;
+    justify-content: space-between;
+    margin: 20px 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    font-size: 22px;
-    color: #fff;
+    color: #e0e0e0;
+    background: rgba(10, 10, 0, 0.3);
     .card-content {
-
+      position: relative;
+      padding: 5px 10px;
+      height: 180px;
+      width: 100%;
+      &-name {
+        line-height: 50px;
+        font-size: 30px;
+      }
+      &-descript {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-camp: 3;
+        overflow: hidden;
+      }
+      &-feature {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+        .card-content-author {
+        }
+      }
     }
     .card-star {
+      padding: 5px 0px;
       flex: 0 0 100px;
     }
   }
