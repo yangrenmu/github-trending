@@ -10,38 +10,47 @@ $blue: #24657c;
 .card {
   font-size: 30px;
   margin: 20px 0;
-  .card-since,
-  .card-language {
-    display: inline-block;
-    width: 50%;
-    .card-since-wrap,
-    .card-language-wrap {
-      display: flex;
-      align-items: center;
-      height: 70px;
-      .icon-down,
-      .icon-up {
-        width: 30px;
-        height: 20px;
-        font-size: 24px;
-        padding: 10px 10px;
-      }
-    }
-    .select-item {
-      position: absolute;
+  .card-select {
+    // width: 100%;
+    margin: 0 20px;
+    box-sizing: border-box;
+    .card-since,
+    .card-language {
+      display: inline-block;
       width: 50%;
-      max-height: 144px;
-      overflow: scroll;
       text-align: center;
-      color: $blue;
-      background-color: rgba(190, 190, 190, 0.7);
-      animation: select 0.3s;
-      .select-text {
-        height: 50px;
-        line-height: 50px;
+      margin: 0 auto;
+      .card-since-wrap,
+      .card-language-wrap {
+        display: flex;
+        align-items: center;
+        height: 70px;
+        .icon-down,
+        .icon-up {
+          width: 30px;
+          height: 20px;
+          font-size: 24px;
+          padding: 10px 10px;
+        }
+      }
+      .select-item {
+        position: absolute;
+        width: 50%;
+        max-height: 144px;
+        overflow: scroll;
+        text-align: center;
+        color: $blue;
+        background-color: rgba(190, 190, 190, 0.9);
+        animation: select 0.3s;
+        .select-text {
+          height: 50px;
+          line-height: 50px;
+        }
+        z-index: 2;
       }
     }
   }
+
   .card-warp {
     display: flex;
     justify-content: space-between;
@@ -53,29 +62,46 @@ $blue: #24657c;
     .card-content {
       position: relative;
       padding: 5px 10px;
-      height: 180px;
+      height: 200px;
       width: 100%;
       &-name {
         line-height: 50px;
         font-size: 30px;
       }
       &-descript {
+        overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-camp: 3;
-        overflow: hidden;
+        -webkit-line-clamp: 2;
       }
       &-feature {
         display: flex;
         position: absolute;
         bottom: 0px;
-        .card-content-author {
-        }
       }
     }
     .card-star {
       padding: 5px 0px;
       flex: 0 0 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .card-star-icon {
+        margin: auto 0;
+        .icon-star {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    float: right;
+    margin: 20px;
+    color: #fff;
+    .next-page {
+      margin-left: 20px;
     }
   }
 }

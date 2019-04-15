@@ -45,9 +45,24 @@ export default class Card extends Component {
   }
   onSinceSelect = e => {
     e.preventDefault()
-    this.setState({
-      sinceItemName: e.currentTarget.dataset.name
-    })
+    this.setState(
+      {
+        sinceItemName: e.currentTarget.dataset.name
+      },
+      () => {
+        const params = {
+          since: this.state.sinceItemName,
+          language: this.state.languageItemName
+        }
+        Taro.showLoading({ title: "加载中" })
+        getTrending(params).then(res => {
+          this.setState({
+            cardData: res.data
+          })
+          Taro.hideLoading()
+        })
+      }
+    )
   }
   showLanguage = () => {
     const { showLanguageSelect } = this.state
@@ -57,8 +72,37 @@ export default class Card extends Component {
   }
   onLanguageSelect = e => {
     e.preventDefault()
+    this.setState(
+      {
+        languageItemName: e.currentTarget.dataset.name
+      },
+      () => {
+        const params = {
+          since: this.state.sinceItemName,
+          language: this.state.languageItemName
+        }
+        Taro.showLoading({ title: "加载中" })
+        getTrending(params).then(res => {
+          this.setState({
+            cardData: res.data
+          })
+          Taro.hideLoading()
+        })
+      }
+    )
+  }
+  nextPage = e => {
+    e.preventDefault()
+    const { pageIndex } = this.state
     this.setState({
-      languageItemName: e.currentTarget.dataset.name
+      pageIndex: pageIndex + 1
+    })
+  }
+  prePage = e => {
+    e.preventDefault()
+    const { pageIndex } = this.state
+    this.setState({
+      pageIndex: pageIndex - 1
     })
   }
   render() {
@@ -113,40 +157,50 @@ export default class Card extends Component {
               <View className='card-content-author'>
                 {`${item.author}/stars: ${item.stars}/forks: ${item.forks}`}
               </View>
-              {/* <View className='card-content-stars'>{item.stars}</View>
-              <View className='card-content-forks'>{item.forks}</View> */}
             </View>
           </View>
           <View className='card-star'>
-            <View>{item.currentPeriodStars}</View>
-            <View>{sinceItemName}</View>
+            <View className='card-star-icon'>
+              <View className='iconfont icon-star' />
+              <View>{item.currentPeriodStars}</View>
+            </View>
+            <View className='since-name'>{sinceItemName}</View>
           </View>
         </View>
       )
     })
     return (
       <View className='card'>
-        <View className='card-since' onClick={this.showSince}>
-          <View className='card-since-wrap'>
-            <View className='card-since-wrap-text'>{`Trending：${sinceItemName}`}</View>
-            <Image className={sinceIcon} />
-          </View>
-          {showSinceSelect ? (
-            <View className='select-item'>{sinceList}</View>
-          ) : null}
-        </View>
-        <View onClick={this.showLanguage} className='card-language'>
-          <View className='card-language-wrap'>
-            <View className='card-language-wrap-text'>
-              {`language：${languageItemName}`}
+        <View className='card-select'>
+          <View className='card-since' onClick={this.showSince}>
+            <View className='card-since-wrap'>
+              <View className='card-since-wrap-text'>{`Trending：${sinceItemName}`}</View>
+              <Image className={sinceIcon} />
             </View>
-            <Image className={languageIcon} />
+            {showSinceSelect ? (
+              <View className='select-item'>{sinceList}</View>
+            ) : null}
           </View>
-          {showLanguageSelect ? (
-            <View className='select-item'>{languageList}</View>
-          ) : null}
+          <View onClick={this.showLanguage} className='card-language'>
+            <View className='card-language-wrap'>
+              <View className='card-language-wrap-text'>
+                {`language：${languageItemName}`}
+              </View>
+              <Image className={languageIcon} />
+            </View>
+            {showLanguageSelect ? (
+              <View className='select-item'>{languageList}</View>
+            ) : null}
+          </View>
         </View>
+
         {cardList}
+        <View className='pagination'>
+          {pageIndex > 0 ? <View onClick={this.prePage}>上一页</View> : null}
+          <View className='next-page' onClick={this.nextPage}>
+            下一页
+          </View>
+        </View>
       </View>
     )
   }
